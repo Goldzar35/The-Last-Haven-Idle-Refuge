@@ -6,7 +6,7 @@ from Entities.Button import Button
 from Entities.GameState import GameState
 
 # From Menus
-from Menus.Core.DefaultMenu import *
+from Menus.Core.DefaultMenu import DefaultMenu 
 from Menus.Core.InventoryMenu import InventoryMenu
 from Menus.Core.ShopMenu import ShopMenu
 from Menus.Skills.ScavengingMenu import *
@@ -100,13 +100,13 @@ while running:
             for btn in sidebar_buttons:
                 if btn.is_clicked((mouse_x, mouse_y)):
                     # Switch to selected menu
-                    game_state.current_menu = btn.action  
+                    game_state.current_menu = btn.action
+        # For Default Menu
+        if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_box_event"):
+            menus[game_state.current_menu].handle_box_event(event)
         # For Scavenging
         if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_scavenge_event"):
             menus[game_state.current_menu].handle_scavenge_event(event)
-
-        if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_resize_box_event"):
-            menus[game_state.current_menu].handle_resize_box_event(event)
 
     # Update scavenging logic globally
     game_state.update_scavenging()
