@@ -34,6 +34,7 @@ class ScavengingMenu:
             mouse_x, mouse_y = event.pos
             if self.scavenge_box.collidepoint(mouse_x, mouse_y):
                 self.game_state.scavenging.toggle_scavenging()
+                print("Scavenge box clicked!")
 
 
 
