@@ -2,8 +2,9 @@ import pygame
 
 class FortificationMenu:
     def __init__(self, player):
-        # Initialize anything specific to the Fortification Menu here
+        '''Initialize Fortification Menu'''
         pass
 
     def draw(self, screen):
-        screen.fill((130, 130, 130)) 
+        '''Draw the Fortification Menu elements on the screen'''
+        screen.fill((130, 130, 130))

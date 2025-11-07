@@ -1,11 +1,9 @@
 import pygame
 
-# From Entities
 from Entities.Player import Player
 from Entities.Button import Button
 from Entities.GameState import GameState
 
-# From Menus
 from Menus.Core.DefaultMenu import DefaultMenu 
 from Menus.Core.InventoryMenu import InventoryMenu
 from Menus.Core.ShopMenu import ShopMenu
@@ -19,25 +17,21 @@ from Menus.Skills.FortificationMenu import FortificationMenu
 from Menus.Skills.CommunityMenu import CommunityMenu
 from Menus.Skills.LegacyMenu import LegacyMenu
 
-# Initialize player
-player = Player()
-
 # Initialize pygame
 pygame.init()
+
+# Initialize player
+player = Player()
 
 # Initialize GameState
 game_state = GameState()
 
 # Initial window size
 info = pygame.display.Info()
-window_width, window_height = info.current_w, info.current_h
-
-# Minimum window size
-MIN_WIDTH = 800
-MIN_HEIGHT = 800
+window_width, window_height = 1280, 720
 
 # Base Display
-screen = pygame.display.set_mode((window_width, window_height), pygame.RESIZABLE)
+screen = pygame.display.set_mode((window_width, window_height))
 screen.fill((40, 40, 40))
 
 # Sidebar size and demension variables
@@ -64,12 +58,10 @@ pygame.draw.rect(screen, (30, 30, 30), (0, 0, 200, 800))
 # Initalize buttons
 for i, name in enumerate(button_names):
     y = gap + i * (button_height + gap)
-    # 0 is the x value, y value, sidebar_width, button_height, name, i determines button index
     btn = Button(0, y, sidebar_width, button_height, name, i) 
-    # append adds a new button to the list
     sidebar_buttons.append(btn)
 
-# Add other Menu's here
+# Initialize Menus
 menus = {
     0: DefaultMenu(game_state.player, sidebar_width, window_width, window_height),
     1: InventoryMenu(game_state.player, sidebar_width),
@@ -96,10 +88,8 @@ while running:
             scroll_offset = max(0, min(scroll_offset, max_scroll)) 
         elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1: 
             mouse_x, mouse_y = event.pos
-            # Handle sidebar button clicks
             for btn in sidebar_buttons:
                 if btn.is_clicked((mouse_x, mouse_y)):
-                    # Switch to selected menu
                     game_state.current_menu = btn.action
         # For Default Menu
         if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_box_event"):

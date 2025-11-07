@@ -2,8 +2,9 @@ import pygame
 
 class MedicineMenu:
     def __init__(self, player):
-        # Initialize anything specific to the Medicine Menu here
+        '''Initialize Medicine Menu'''
         pass
 
     def draw(self, screen):
-        screen.fill((110, 110, 110))  
+        '''Draw the Medicine Menu elements on the screen'''
+        screen.fill((110, 110, 110))

@@ -3,9 +3,8 @@ import pygame
 scavenge_tick = 0.5
 
 class Player:
-
     def __init__(self):
-        # Setting player attributes
+        ''' Initialize player with default attributes '''
         self.inventory = {
             "Wood Planks": 0,
             "Cement": 0,
@@ -19,23 +18,24 @@ class Player:
             "People": 0,
             "Batteries": 0
         }
-    
         self.scavenging = False
 
-    # Inventory logic
     def add_inventory(self, items, quantity):
+        ''' Add items to the player's inventory '''
         if items in self.inventory:
             self.inventory[items] += quantity
         else:
             self.inventory[items] = quantity
 
     def remove_inventory(self, item, quantity):
-        if item in self.inventory and self.player.inventory[item] >= quantity:
-            self.player.inventory[item] -= quantity
+        ''' Remove items from the player's inventory '''
+        if item in self.inventory and self.inventory[item] >= quantity:
+            self.inventory[item] -= quantity
         else:
             pass
 
     def show_inventory(self):
-        print( self.inventory)
+        ''' Print the player's inventory to the console '''
+        print(self.inventory)
         for item, quantity in self.inventory.items():
             print(f"  {item}: {quantity}")

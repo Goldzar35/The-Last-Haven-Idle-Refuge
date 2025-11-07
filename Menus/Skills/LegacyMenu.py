@@ -2,9 +2,9 @@ import pygame
 
 class LegacyMenu:
     def __init__(self, player):
-        # Initialize anything specific to the Legacy Menu here
+        '''Initialize Legacy Menu'''
         pass
 
     def draw(self, screen):
-        screen.fill((150, 150, 150)) 
- 
+        '''Draw the Legacy Menu elements on the screen'''
+        screen.fill((150, 150, 150))
