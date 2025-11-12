@@ -13,8 +13,8 @@ class Scavenging:
         self.scavenge_time = 0
         self.items = {
             "Gasoline": 1,    
-            "People": 10,         
-            "Batteries": 20,         
+            "People": 5,         
+            "Canned Food": 20,         
             "Electronics": 30,   
             "Spare Parts": 40,
             "Nails": 50,         

@@ -12,14 +12,14 @@ class InventoryMenu:
     def draw(self, screen):
         '''Draw the Inventory Menu elements on the screen'''
         screen.fill((50, 50, 50)) 
-        font = pygame.font.Font(None, 36)
+        font = pygame.font.Font(None, 25)
         y = self.margin
         # Temp inventory display logic
         for item, quantity in self.player.inventory.items():
             text = f"{item}: {quantity}"
             text_surf = font.render(text, True, (255, 255, 255))
             screen.blit(text_surf, (self.sidebar_width + 20, y))
-            y += 40
+            y += 30
 
     def add_inventory(self, item, quantity):
         '''Add items to the player's inventory'''

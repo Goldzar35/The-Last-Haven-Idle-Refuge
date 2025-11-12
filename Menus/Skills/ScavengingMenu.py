@@ -1,8 +1,6 @@
 import pygame
 
-# From Entities
 from Entities.Scavenging import *
-
 
 class ScavengingMenu:
     def __init__(self, player, game_state, sidebar_width, window_width, window_height):
@@ -27,7 +25,7 @@ class ScavengingMenu:
         screen.fill((70, 70, 70))
         pygame.draw.rect(screen, (100, 100, 100), self.scavenge_box)  
         
-    def handle_scavenge_event(self, event,):
+    def handle_foraging_event(self, event,):
         '''Handle events for the scavenge_box to toggle scavenging'''
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  
             mouse_x, mouse_y = event.pos
