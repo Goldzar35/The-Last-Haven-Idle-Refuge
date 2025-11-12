@@ -67,7 +67,7 @@ menus = {
     1: InventoryMenu(game_state.player, sidebar_width),
     2: ShopMenu(game_state.player),
     3: ScavengingMenu(game_state.player, game_state, sidebar_width, window_width, window_height),
-    4: ForagingMenu(game_state.player),
+    4: ForagingMenu(game_state.player, game_state, sidebar_width, window_width, window_height),
     5: HuntingMenu(game_state.player),
     6: EngineeringMenu(game_state.player),
     7: MedicineMenu(game_state.player),
@@ -94,12 +94,16 @@ while running:
         # For Default Menu
         if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_box_event"):
             menus[game_state.current_menu].handle_box_event(event)
+        # For Foraging
+        if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_foraging_event"):
+            menus[game_state.current_menu].handle_foraging_event(event)
         # For Scavenging
         if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_scavenge_event"):
             menus[game_state.current_menu].handle_scavenge_event(event)
 
     # Update scavenging logic globally
     game_state.update_scavenging()
+    game_state.update_foraging() 
     
     # Draw the current menu background
     if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "draw"):

@@ -1,22 +1,33 @@
 import pygame
 
 scavenge_tick = 0.5
+forage_tick = 0.5
 
 class Player:
     def __init__(self):
         ''' Initialize player with default attributes '''
         self.inventory = {
-            "Wood Planks": 0,
-            "Cement": 0,
-            "Rope": 0,
-            "Nails": 0,
-            "Metal Scrap": 0,
-            "Electronics": 0,
-            "Fabric Scrap": 0,
+            "Gasoline": 0,    
+            "People": 0,         
+            "Canned Food": 0,         
+            "Electronics": 0,   
             "Spare Parts": 0,
-            "Gasoline": 0,
-            "People": 0,
-            "Batteries": 0
+            "Nails": 0,         
+            "Metal Scrap": 0,    
+            "Rope": 0,   
+            "Fabric Scrap": 0,   
+            "Cement": 0,     
+            "Wood Planks": 0,
+            "Mirabelle Fruit": 0,    
+            "Magic Artifact": 0,         
+            "Medical Herbs": 0,         
+            "Honey Comb": 0,   
+            "Fresh Water": 0,
+            "Berries": 0,         
+            "Seeds": 0,   
+            "Wild Vegetables": 0, 
+            "Fish": 0,     
+            "Dirty Water": 0  
         }
         self.scavenging = False
 
