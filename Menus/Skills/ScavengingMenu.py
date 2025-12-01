@@ -30,6 +30,9 @@ class ScavengingMenu:
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  
             mouse_x, mouse_y = event.pos
             if self.scavenge_box.collidepoint(mouse_x, mouse_y):
+                if hasattr(self.game_state, "foraging") and getattr(self.game_state.foraging, "is_foraging", False):
+                    self.game_state.foraging.is_foraging = False
+                    print("Stopped Foraging to start Scavenging")
                 self.game_state.scavenging.toggle_scavenging()
 
 

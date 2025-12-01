@@ -22,3 +22,17 @@ class GameState:
         if hasattr(self, 'foraging') and self.foraging.is_foraging:
             self.foraging.foraging()
 
+    # Exclusive starters: starting one stops the other
+    def start_scavenging(self):
+        self.foraging.is_foraging = False
+        self.scavenging.is_scavenging = True
+
+    def start_foraging(self):
+        self.scavenging.is_scavenging = False
+        self.foraging.is_foraging = True
+
+    def stop_scavenging(self):
+        self.scavenging.is_scavenging = False
+
+    def stop_foraging(self):
+        self.foraging.is_foraging = False
