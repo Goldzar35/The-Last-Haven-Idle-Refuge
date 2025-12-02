@@ -9,7 +9,6 @@ class ScavengingMenu:
         self.sidebar_width = sidebar_width
         self.player = player
         self.game_state = game_state 
-        self.sidebar_width = sidebar_width
         self.scavenging = Scavenging(player)  
 
         # Scavenging box dimensions

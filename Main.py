@@ -72,7 +72,7 @@ menus = {
     6: EngineeringMenu(game_state.player),
     7: MedicineMenu(game_state.player),
     8: CookingMenu(game_state.player),
-    9: FortificationMenu(game_state.player),
+    9: FortificationMenu(game_state.player, sidebar_width, window_width, window_height),
     10: CommunityMenu(game_state.player),
     11: LegacyMenu(game_state.player)
 }
@@ -100,6 +100,9 @@ while running:
         # For Scavenging
         if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_scavenge_event"):
             menus[game_state.current_menu].handle_scavenge_event(event)
+        # For Fortification
+        if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_fortification_event"):
+            menus[game_state.current_menu].handle_fortification_event(event)
 
     # Update scavenging logic globally
     game_state.update_scavenging()
