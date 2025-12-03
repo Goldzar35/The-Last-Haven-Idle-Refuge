@@ -3,14 +3,11 @@ import random
 import time 
 
 from Entities.Player import forage_tick
-from Entities.Scavenging import Scavenging
-
 
 class Foraging:
     def __init__(self, player):
         '''Initialize Foraging entity with player reference and foraging parameters'''
         self.player = player
-        self.scavenging = Scavenging(player)
         self.is_foraging = False
         self.foraging_time = 0
         self.items = {

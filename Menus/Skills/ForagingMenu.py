@@ -32,4 +32,7 @@ class ForagingMenu:
                 if hasattr(self.game_state, "scavenging") and getattr(self.game_state.scavenging, "is_scavenging", False):
                     self.game_state.scavenging.is_scavenging = False
                     print("Stopped Scavenging to start Foraging")
+                if hasattr(self.game_state, "hunting") and getattr(self.game_state.hunting, "is_hunting", False):
+                    self.game_state.hunting.is_hunting = False
+                    print("Stopped Hunting to start Foraging")
                 self.game_state.foraging.toggle_foraging()

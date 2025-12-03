@@ -68,7 +68,7 @@ menus = {
     2: ShopMenu(game_state.player),
     3: ScavengingMenu(game_state.player, game_state, sidebar_width, window_width, window_height),
     4: ForagingMenu(game_state.player, game_state, sidebar_width, window_width, window_height),
-    5: HuntingMenu(game_state.player),
+    5: HuntingMenu(game_state.player, game_state, sidebar_width, window_width, window_height),
     6: EngineeringMenu(game_state.player),
     7: MedicineMenu(game_state.player),
     8: CookingMenu(game_state.player),
@@ -94,12 +94,15 @@ while running:
         # For Default Menu
         if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_box_event"):
             menus[game_state.current_menu].handle_box_event(event)
-        # For Foraging
-        if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_foraging_event"):
-            menus[game_state.current_menu].handle_foraging_event(event)
         # For Scavenging
         if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_scavenge_event"):
             menus[game_state.current_menu].handle_scavenge_event(event)
+        # For Foraging
+        if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_foraging_event"):
+            menus[game_state.current_menu].handle_foraging_event(event)
+        # For Hunting
+        if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_hunting_event"):
+            menus[game_state.current_menu].handle_hunting_event(event)
         # For Fortification
         if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_fortification_event"):
             menus[game_state.current_menu].handle_fortification_event(event)
@@ -107,6 +110,7 @@ while running:
     # Update scavenging logic globally
     game_state.update_scavenging()
     game_state.update_foraging() 
+    game_state.update_hunting()
     
     # Draw the current menu background
     if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "draw"):

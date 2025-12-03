@@ -2,6 +2,7 @@ import pygame
 
 from Entities.Scavenging import *
 
+
 class ScavengingMenu:
     def __init__(self, player, game_state, sidebar_width, window_width, window_height):
         '''Initialize the Scavenging Menu'''
@@ -32,6 +33,9 @@ class ScavengingMenu:
                 if hasattr(self.game_state, "foraging") and getattr(self.game_state.foraging, "is_foraging", False):
                     self.game_state.foraging.is_foraging = False
                     print("Stopped Foraging to start Scavenging")
+                if hasattr(self.game_state, "hunting") and getattr(self.game_state.hunting, "is_hunting", False):
+                    self.game_state.hunting.is_hunting = False
+                    print("Stopped Hunting to start Scavenging")
                 self.game_state.scavenging.toggle_scavenging()
 
 

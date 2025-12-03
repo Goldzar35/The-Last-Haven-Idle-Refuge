@@ -2,6 +2,7 @@ import pygame
 
 scavenge_tick = 0.5
 forage_tick = 0.5
+hunting_tick = 0.5
 
 class Player:
     def __init__(self):
@@ -27,7 +28,16 @@ class Player:
             "Seeds": 0,   
             "Wild Vegetables": 0, 
             "Fish": 0,     
-            "Dirty Water": 0  
+            "Dirty Water": 0, 
+            "Intact Infected Organ": 0,    
+            "Boar Tusk": 0,         
+            "Blood Sample": 0,         
+            "Eggs": 0,
+            "Zombie Flesh": 0,
+            "Animal Fat": 0,
+            "Hide": 0,
+            "Bones": 0,
+            "Meat": 0
         }
         self.scavenging = False
 
