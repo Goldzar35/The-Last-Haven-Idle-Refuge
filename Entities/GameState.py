@@ -4,6 +4,7 @@ from Entities.Scavenging import Scavenging
 from Entities.Foraging import Foraging
 from Entities.Hunting import Hunting
 from Entities.Player import Player
+from Entities.Fortification import Fortification
 
 class GameState:
     def __init__(self):
@@ -13,6 +14,7 @@ class GameState:
         self.scavenging = Scavenging(self.player)
         self.foraging = Foraging(self.player)
         self.hunting = Hunting(self.player)
+        self.fortification = Fortification(self.player)
 
     def update_scavenging(self):
         '''Update the scavenging state if it's active'''

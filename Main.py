@@ -72,7 +72,7 @@ menus = {
     6: EngineeringMenu(game_state.player),
     7: MedicineMenu(game_state.player),
     8: CookingMenu(game_state.player),
-    9: FortificationMenu(game_state.player, sidebar_width, window_width, window_height),
+    9: FortificationMenu(game_state.player, game_state.fortification, sidebar_width, window_width, window_height),
     10: CommunityMenu(game_state.player),
     11: LegacyMenu(game_state.player)
 }
