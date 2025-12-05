@@ -28,7 +28,7 @@ game_state = GameState()
 
 # Initial window size
 info = pygame.display.Info()
-window_width, window_height = 1280, 720
+window_width, window_height = 1600, 900
 
 # Base Display
 screen = pygame.display.set_mode((window_width, window_height))
