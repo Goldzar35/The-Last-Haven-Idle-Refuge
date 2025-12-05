@@ -4,7 +4,6 @@ import time
 
 from Entities.Player import forage_tick
 
-
 class Foraging:
     def __init__(self, player):
         '''Initialize Foraging entity with player reference and foraging parameters'''

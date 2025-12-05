@@ -2,6 +2,7 @@ import pygame
 
 from Entities.Scavenging import *
 
+
 class ScavengingMenu:
     def __init__(self, player, game_state, sidebar_width, window_width, window_height):
         '''Initialize the Scavenging Menu'''
@@ -9,7 +10,6 @@ class ScavengingMenu:
         self.sidebar_width = sidebar_width
         self.player = player
         self.game_state = game_state 
-        self.sidebar_width = sidebar_width
         self.scavenging = Scavenging(player)  
 
         # Scavenging box dimensions
@@ -30,6 +30,12 @@ class ScavengingMenu:
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  
             mouse_x, mouse_y = event.pos
             if self.scavenge_box.collidepoint(mouse_x, mouse_y):
+                if hasattr(self.game_state, "foraging") and getattr(self.game_state.foraging, "is_foraging", False):
+                    self.game_state.foraging.is_foraging = False
+                    print("Stopped Foraging to start Scavenging")
+                if hasattr(self.game_state, "hunting") and getattr(self.game_state.hunting, "is_hunting", False):
+                    self.game_state.hunting.is_hunting = False
+                    print("Stopped Hunting to start Scavenging")
                 self.game_state.scavenging.toggle_scavenging()
 
 

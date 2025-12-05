@@ -9,7 +9,6 @@ class ForagingMenu:
         self.sidebar_width = sidebar_width
         self.player = player
         self.game_state = game_state 
-        self.sidebar_width = sidebar_width
         self.foraging = Foraging(player) 
 
         # Scavenging box dimensions
@@ -30,4 +29,10 @@ class ForagingMenu:
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  
             mouse_x, mouse_y = event.pos
             if self.foraging_box.collidepoint(mouse_x, mouse_y):
+                if hasattr(self.game_state, "scavenging") and getattr(self.game_state.scavenging, "is_scavenging", False):
+                    self.game_state.scavenging.is_scavenging = False
+                    print("Stopped Scavenging to start Foraging")
+                if hasattr(self.game_state, "hunting") and getattr(self.game_state.hunting, "is_hunting", False):
+                    self.game_state.hunting.is_hunting = False
+                    print("Stopped Hunting to start Foraging")
                 self.game_state.foraging.toggle_foraging()

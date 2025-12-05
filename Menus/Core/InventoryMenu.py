@@ -14,12 +14,19 @@ class InventoryMenu:
         screen.fill((50, 50, 50)) 
         font = pygame.font.Font(None, 25)
         y = self.margin
+        x = self.sidebar_width + 20
+        col_width = 300
+        screen_height = screen.get_height()
         # Temp inventory display logic
-        for item, quantity in self.player.inventory.items():
+        for item, (item, quantity) in enumerate(self.player.inventory.items()):
             text = f"{item}: {quantity}"
             text_surf = font.render(text, True, (255, 255, 255))
-            screen.blit(text_surf, (self.sidebar_width + 20, y))
+            screen.blit(text_surf, (x, y))
             y += 30
+            # Item list hits bottom of screen, move to next column
+            if y + 30 > screen_height - self.margin:
+                y = self.margin
+                x += col_width
 
     def add_inventory(self, item, quantity):
         '''Add items to the player's inventory'''
