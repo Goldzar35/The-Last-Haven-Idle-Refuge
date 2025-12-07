@@ -9,14 +9,19 @@ This is an idle game inspired by Melvor Idle, it is my first main project. Coded
 -Menu Select
 -Customizable Button's
 -Temp Inventory
--Scavenging 
--A toggle to gather a group of resources
+-Scavenging resource gathering
+-Hunting reasource gathering
+-Foraging reasource gathering
+-Fortification background change
 
 # Project Structure
 The Project is organized into these main folders
     -Entities
         Button
+        Foraging
+        Fortification
         GameState
+        Hunting
         Player
         Scavenging
     -Menus

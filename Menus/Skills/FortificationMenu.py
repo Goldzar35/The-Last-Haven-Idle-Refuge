@@ -12,7 +12,10 @@ class FortificationMenu:
         self.backgrounds = [
             pygame.image.load("Assets/Base_lvl_1.png").convert(),
             pygame.image.load("Assets/Base_lvl_2.png").convert(),
-            pygame.image.load("Assets/Base_lvl_3.png").convert()
+            pygame.image.load("Assets/Base_lvl_3.png").convert(),
+            pygame.image.load("Assets/Base_lvl_4.png").convert(),
+            pygame.image.load("Assets/Base_lvl_5.png").convert(),
+            pygame.image.load("Assets/Base_lvl_6.png").convert()
         ]
         
 
