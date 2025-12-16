@@ -9,7 +9,9 @@ class HuntingMenu:
         self.sidebar_width = sidebar_width
         self.player = player
         self.game_state = game_state 
-        self.hunting = Hunting(player) 
+        self.pending_hunt = False
+        self.hunt_start_time = 0
+        self.hunt_delay = 3000
 
         # Scavenging box dimensions
         self.box_x = self.sidebar_width + self.margin
@@ -35,4 +37,22 @@ class HuntingMenu:
                 if hasattr(self.game_state, "foraging") and getattr(self.game_state.foraging, "is_foraging", False):
                     self.game_state.foraging.is_foraging = False
                     print("Stopped Foraging to start Hunting")
+                self.pending_hunt = True
+                self.hunt_start_time = pygame.time.get_ticks()
+                if not self.game_state.hunting.is_hunting:
+                    print("Hunting will start after delay!")
+                else:
+                    print("Hunting will end after delay!")
+
+    def update(self):
+        '''Check if delay has passed and start hunting'''
+        if hasattr(self, "pending_hunt") and self.pending_hunt:
+            now = pygame.time.get_ticks()
+            # self.hunt_delay is in seconds, pygame.time.get_ticks() is in ms
+            if now - self.hunt_start_time >= getattr(self, "hunt_delay", 1000):
+                self.pending_hunt = False
                 self.game_state.hunting.toggle_hunting()
+                if self.game_state.hunting.is_hunting:
+                    print("Hunting started after delay!")
+                else:
+                    print("Hunting ended after delay!")

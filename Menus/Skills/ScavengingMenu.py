@@ -12,7 +12,7 @@ class ScavengingMenu:
         self.game_state = game_state 
         self.pending_scavenge = False
         self.scavenge_start_time = 0
-        self.scavenge_delay = 3000  # Delay in milliseconds before scavenging starts
+        self.scavenge_delay = 3000  
 
         # Scavenging box dimensions
         self.box_x = self.sidebar_width + self.margin
