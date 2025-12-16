@@ -111,6 +111,10 @@ while running:
     game_state.update_scavenging()
     game_state.update_foraging() 
     game_state.update_hunting()
+
+    # Update menu-specific logic (like scavenging delay)
+    if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "update"):
+        menus[game_state.current_menu].update()
     
     # Draw the current menu background
     if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "draw"):

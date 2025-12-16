@@ -10,7 +10,9 @@ class ScavengingMenu:
         self.sidebar_width = sidebar_width
         self.player = player
         self.game_state = game_state 
-        self.scavenging = Scavenging(player)  
+        self.pending_scavenge = False
+        self.scavenge_start_time = 0
+        self.scavenge_delay = 3000  # Delay in milliseconds before scavenging starts
 
         # Scavenging box dimensions
         self.box_x = self.sidebar_width + self.margin
@@ -25,7 +27,7 @@ class ScavengingMenu:
         screen.fill((70, 70, 70))
         pygame.draw.rect(screen, (100, 100, 100), self.scavenge_box)  
         
-    def handle_foraging_event(self, event,):
+    def handle_scavenge_event(self, event,):
         '''Handle events for the scavenge_box to toggle scavenging'''
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  
             mouse_x, mouse_y = event.pos
@@ -36,7 +38,25 @@ class ScavengingMenu:
                 if hasattr(self.game_state, "hunting") and getattr(self.game_state.hunting, "is_hunting", False):
                     self.game_state.hunting.is_hunting = False
                     print("Stopped Hunting to start Scavenging")
+                self.pending_scavenge = True
+                self.scavenge_start_time = pygame.time.get_ticks()
+                if not self.game_state.scavenging.is_scavenging:
+                    print("Scavenging will start after delay!")
+                else:
+                    print("Scavenging will end after delay!")
+
+    def update(self):
+        '''Check if delay has passed and start scavenging'''
+        if hasattr(self, "pending_scavenge") and self.pending_scavenge:
+            now = pygame.time.get_ticks()
+            # self.scavenge_delay is in seconds, pygame.time.get_ticks() is in ms
+            if now - self.scavenge_start_time >= getattr(self, "scavenge_delay", 1000):
+                self.pending_scavenge = False
                 self.game_state.scavenging.toggle_scavenging()
+                if self.game_state.scavenging.is_scavenging:
+                    print("Scavenging started after delay!")
+                else:
+                    print("Scavenging ended after delay!")
 
 
 
