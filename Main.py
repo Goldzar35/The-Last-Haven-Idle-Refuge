@@ -61,20 +61,24 @@ for i, name in enumerate(button_names):
     btn = Button(0, y, sidebar_width, button_height, name, i) 
     sidebar_buttons.append(btn)
 
+# Instaniate Menus
+scavenging_menu = ScavengingMenu(player, sidebar_width, window_width, window_height, game_state)
+engineering_menu = EngineeringMenu(game_state.player, sidebar_width, window_width, window_height, game_state, scavenging_menu)
+
 # Initialize Menus
 menus = {
     0: DefaultMenu(game_state.player, sidebar_width, window_width, window_height),
-    1: InventoryMenu(game_state.player, sidebar_width),
-    2: ShopMenu(game_state.player),
-    3: ScavengingMenu(game_state.player, game_state, sidebar_width, window_width, window_height),
-    4: ForagingMenu(game_state.player, game_state, sidebar_width, window_width, window_height),
-    5: HuntingMenu(game_state.player, game_state, sidebar_width, window_width, window_height),
-    6: EngineeringMenu(game_state.player),
-    7: MedicineMenu(game_state.player),
-    8: CookingMenu(game_state.player),
-    9: FortificationMenu(game_state.player, game_state.fortification, sidebar_width, window_width, window_height),
-    10: CommunityMenu(game_state.player),
-    11: LegacyMenu(game_state.player)
+    1: InventoryMenu(game_state.player, sidebar_width, window_width, window_height),
+    2: ShopMenu(game_state.player, sidebar_width, window_width, window_height),
+    3: scavenging_menu,
+    4: ForagingMenu(game_state.player, sidebar_width, window_width, window_height, game_state),
+    5: HuntingMenu(game_state.player, sidebar_width, window_width, window_height, game_state),
+    6: engineering_menu,
+    7: MedicineMenu(game_state.player, sidebar_width, window_width, window_height, game_state),
+    8: CookingMenu(game_state.player, sidebar_width, window_width, window_height, game_state),
+    9: FortificationMenu(game_state.player, game_state.fortification, sidebar_width, window_width, window_height, game_state),
+    10: CommunityMenu(game_state.player, sidebar_width, window_width, window_height, game_state),
+    11: LegacyMenu(game_state.player, sidebar_width, window_width, window_height, game_state)
 }
 
 # Main game loop
@@ -103,6 +107,9 @@ while running:
         # For Hunting
         if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_hunting_event"):
             menus[game_state.current_menu].handle_hunting_event(event)
+        # For Engineering
+        if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_engineering_event"):
+            menus[game_state.current_menu].handle_engineering_event(event)
         # For Fortification
         if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_fortification_event"):
             menus[game_state.current_menu].handle_fortification_event(event)

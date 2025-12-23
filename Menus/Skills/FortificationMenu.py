@@ -3,7 +3,7 @@ import pygame
 from Entities.Fortification import *
 
 class FortificationMenu:
-    def __init__(self, player, fortification, sidebar_width, window_width, window_height):
+    def __init__(self, player, fortification, sidebar_width, window_width, window_height, game_state):
         '''Initialize Fortification Menu'''
         self.player = player
         self.fortification = fortification

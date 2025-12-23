@@ -1,7 +1,7 @@
 import pygame
 
 class ShopMenu:
-    def __init__(self, player):
+    def __init__(self, player, sidebar_width, window_width, window_height):
         '''Initialize the Shop Menu'''
         pass
 

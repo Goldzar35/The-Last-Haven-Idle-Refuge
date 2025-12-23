@@ -3,7 +3,7 @@ import pygame
 from Entities.Foraging import *
 
 class ForagingMenu:
-    def __init__(self, player, game_state, sidebar_width, window_width, window_height):
+    def __init__(self, player, sidebar_width, window_width, window_height, game_state):
         '''Initialize Foraging Menu'''
         self.margin = 30
         self.sidebar_width = sidebar_width

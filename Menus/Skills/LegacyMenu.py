@@ -1,7 +1,7 @@
 import pygame
 
 class LegacyMenu:
-    def __init__(self, player):
+    def __init__(self, player, sidebar_width, window_width, window_height, game_state):
         '''Initialize Legacy Menu'''
         pass
 

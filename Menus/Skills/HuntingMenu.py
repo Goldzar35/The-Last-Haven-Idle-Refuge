@@ -3,7 +3,7 @@ import pygame
 from Entities.Hunting import *
 
 class HuntingMenu:
-    def __init__(self, player, game_state, sidebar_width, window_width, window_height):
+    def __init__(self, player, sidebar_width, window_width, window_height, game_state):
         '''Initialize Hunting Menu'''
         self.margin = 30
         self.sidebar_width = sidebar_width

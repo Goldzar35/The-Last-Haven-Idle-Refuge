@@ -3,7 +3,7 @@ import pygame
 from Entities.Player import * 
 
 class InventoryMenu:
-    def __init__(self, player, sidebar_width):
+    def __init__(self, player, sidebar_width, window_width, window_height):
         '''Initialize the Inventory Menu'''
         self.player = player
         self.sidebar_width = sidebar_width
