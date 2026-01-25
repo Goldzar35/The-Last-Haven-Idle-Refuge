@@ -49,5 +49,7 @@ class FortificationMenu:
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  
             mouse_x, mouse_y = event.pos
             if self.fortification_box.collidepoint(mouse_x, mouse_y):
-                self.fortification.change_background(len(self.backgrounds))
-                print("Fortification box clicked!")
+                if self.player.inventory.get("Wood", 0) >= 5:
+                    self.player.inventory["Wood"] -= 5
+                    self.fortification.change_background(len(self.backgrounds))
+                    print("Fortification box clicked!")
