@@ -2,7 +2,7 @@ import pygame
 
 
 class EngineeringMenu:
-    def __init__(self, player, sidebar_width, window_width, window_height, game_state, scavenging_menu, foraging_menu):
+    def __init__(self, player, sidebar_width, window_width, window_height, game_state, scavenging_menu, foraging_menu, hunting_menu):
         '''Initialize Engineering Menu'''
         self.player = player
         self.game_state = game_state
@@ -10,6 +10,7 @@ class EngineeringMenu:
         self.margin = 30
         self.scavenging_menu = scavenging_menu
         self.foraging_menu = foraging_menu
+        self.hunting_menu = hunting_menu
 
         # Engineering scavenging box dimensions
         self.box_x_1 = self.sidebar_width + self.margin
@@ -36,6 +37,18 @@ class EngineeringMenu:
         self.foraging_button_rect = pygame.Rect(self.box_x_2 + 50, self.box_y_2 + 50, 200, 50)
         self.foraging_button_text = "Reduce Forage Delay"
 
+        # Engineering hunting box dimensions
+        self.box_x_3 = self.sidebar_width + self.margin
+        self.box_y_3 = self.box_y_2 + self.box_height_2
+        self.box_width_3 = int(0.75 * window_width)
+        self.box_height_3 = int(0.4 * window_height)
+
+        self.engineering_hunting_box = pygame.Rect(self.box_x_3, self.box_y_3, self.box_width_3, self.box_height_3)
+
+        # Button for reducing hunting delay
+        self.hunting_button_rect = pygame.Rect(self.box_x_3 + 50, self.box_y_3 + 50, 200, 50)
+        self.hunting_button_text = "Reduce Hunt Delay"
+
     def draw(self, screen):
         '''Draw the Engineering Menu elements on the screen'''
         screen.fill((100, 100, 100)) 
@@ -51,6 +64,11 @@ class EngineeringMenu:
         forage_text_surface = self.font.render(self.foraging_button_text, True, (255, 255, 255))
         forage_text_rect = forage_text_surface.get_rect(center=self.foraging_button_rect.center)
         screen.blit(forage_text_surface, forage_text_rect)
+        # Engineering hunting button
+        pygame.draw.rect(screen, (180, 180, 180), self.hunting_button_rect)
+        hunting_text_surface = self.font.render(self.hunting_button_text, True, (255, 255, 255))
+        hunting_text_rect = hunting_text_surface.get_rect(center=self.hunting_button_rect.center)
+        screen.blit(hunting_text_surface, hunting_text_rect)
 
     def handle_engineering_scavenging_event(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  
@@ -67,3 +85,11 @@ class EngineeringMenu:
                 old_time = self.foraging_menu.forage_delay
                 self.foraging_menu.forage_delay = max(500, old_time - 500)
                 print(f"Foraging start delay reduced to {self.foraging_menu.forage_delay} ms")
+
+    def handle_engineering_hunting_event(self, event):
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            mouse_x, mouse_y = event.pos
+            if self.engineering_hunting_box.collidepoint(mouse_x, mouse_y):
+                old_time = self.hunting_menu.hunt_delay
+                self.hunting_menu.hunt_delay = max(500, old_time - 500)
+                print(f"Hunting start delay reduced to {self.hunting_menu.hunt_delay} ms")

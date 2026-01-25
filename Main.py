@@ -64,7 +64,8 @@ for i, name in enumerate(button_names):
 # Instaniate Menus
 scavenging_menu = ScavengingMenu(player, sidebar_width, window_width, window_height, game_state)
 foraging_menu = ForagingMenu(player, sidebar_width, window_width, window_height, game_state)
-engineering_menu = EngineeringMenu(game_state.player, sidebar_width, window_width, window_height, game_state, scavenging_menu, foraging_menu)
+hunting_menu = HuntingMenu(player, sidebar_width, window_width, window_height, game_state)
+engineering_menu = EngineeringMenu(game_state.player, sidebar_width, window_width, window_height, game_state, scavenging_menu, foraging_menu, hunting_menu)
 
 # Initialize Menus
 menus = {
@@ -73,7 +74,7 @@ menus = {
     2: ShopMenu(game_state.player, sidebar_width, window_width, window_height),
     3: scavenging_menu,
     4: foraging_menu,
-    5: HuntingMenu(game_state.player, sidebar_width, window_width, window_height, game_state),
+    5: hunting_menu,
     6: engineering_menu,
     7: MedicineMenu(game_state.player, sidebar_width, window_width, window_height, game_state),
     8: CookingMenu(game_state.player, sidebar_width, window_width, window_height, game_state),
@@ -113,6 +114,8 @@ while running:
             menus[game_state.current_menu].handle_engineering_scavenging_event(event)
         if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_engineering_foraging_event"):
             menus[game_state.current_menu].handle_engineering_foraging_event(event)
+        if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_engineering_hunting_event"):
+            menus[game_state.current_menu].handle_engineering_hunting_event(event)
         # For Fortification
         if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_fortification_event"):
             menus[game_state.current_menu].handle_fortification_event(event)
