@@ -9,7 +9,7 @@ class Button:
 
     def draw(self, screen, font):
         '''Draw the button on the screen'''
-        pygame.draw.rect(screen, (150, 150, 150), self.rect)  
+        pygame.draw.rect(screen, (170, 170, 170), self.rect)  
         text_surf = font.render(self.text, True, (0, 0, 0))  
         text_rect = text_surf.get_rect(center=self.rect.center)
         screen.blit(text_surf, text_rect)
