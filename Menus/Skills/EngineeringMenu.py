@@ -16,7 +16,7 @@ class EngineeringMenu:
         self.box_x_1 = self.sidebar_width + self.margin
         self.box_y_1 = self.margin
         self.box_width_1 = int(0.75 * window_width)
-        self.box_height_1 = int(0.4 * window_height)
+        self.box_height_1 = int(0.2 * window_height)
 
         self.engineering_scavenging_box = pygame.Rect(self.box_x_1, self.box_y_1, self.box_width_1, self.box_height_1)
 
@@ -29,24 +29,26 @@ class EngineeringMenu:
         self.box_x_2 = self.sidebar_width + self.margin
         self.box_y_2 = self.box_y_1 + self.box_height_1 
         self.box_width_2 = int(0.75 * window_width)
-        self.box_height_2 = int(0.4 * window_height)
+        self.box_height_2 = int(0.2 * window_height)
 
         self.engineering_foraging_box = pygame.Rect(self.box_x_2, self.box_y_2, self.box_width_2, self.box_height_2)
 
         # Button for reducing foraging delay
         self.foraging_button_rect = pygame.Rect(self.box_x_2 + 50, self.box_y_2 + 50, 200, 50)
+        self.font = pygame.font.Font(None, 32)
         self.foraging_button_text = "Reduce Forage Delay"
 
         # Engineering hunting box dimensions
         self.box_x_3 = self.sidebar_width + self.margin
         self.box_y_3 = self.box_y_2 + self.box_height_2
         self.box_width_3 = int(0.75 * window_width)
-        self.box_height_3 = int(0.4 * window_height)
+        self.box_height_3 = int(0.2 * window_height)
 
         self.engineering_hunting_box = pygame.Rect(self.box_x_3, self.box_y_3, self.box_width_3, self.box_height_3)
 
         # Button for reducing hunting delay
         self.hunting_button_rect = pygame.Rect(self.box_x_3 + 50, self.box_y_3 + 50, 200, 50)
+        self.font = pygame.font.Font(None, 32)
         self.hunting_button_text = "Reduce Hunt Delay"
 
     def draw(self, screen):
@@ -54,11 +56,12 @@ class EngineeringMenu:
         screen.fill((100, 100, 100)) 
         pygame.draw.rect(screen, (120, 120, 120), self.engineering_scavenging_box)
         pygame.draw.rect(screen, (150, 150, 150), self.engineering_foraging_box)
+        pygame.draw.rect(screen, (180, 180, 180), self.engineering_hunting_box)
         # Engineering scavenging button
         pygame.draw.rect(screen, (120, 120, 120), self.button_rect)
-        text_surface = self.font.render(self.button_text, True, (255, 255, 255))
-        text_rect = text_surface.get_rect(center=self.button_rect.center)
-        screen.blit(text_surface, text_rect)
+        scavenge_text_surface = self.font.render(self.button_text, True, (255, 255, 255))
+        scavenge_text_rect = scavenge_text_surface.get_rect(center=self.button_rect.center)
+        screen.blit(scavenge_text_surface, scavenge_text_rect)
         # Engineering foraging button
         pygame.draw.rect(screen, (150, 150, 150), self.foraging_button_rect)
         forage_text_surface = self.font.render(self.foraging_button_text, True, (255, 255, 255))
