@@ -13,6 +13,7 @@ This is an idle game inspired by Melvor Idle, it is my first main project. Coded
 -Hunting reasource gathering
 -Foraging reasource gathering
 -Fortification background change
+-Engineering to reduce starting time of scavenging, foraging, and hunting
 
 # Project Structure
 The Project is organized into these main folders

@@ -33,25 +33,33 @@ class GameState:
 
     # Exclusive starters: starting one stops the other
     def start_scavenging(self):
+        '''Start scavenging and stop other activities'''
         self.foraging.is_foraging = False
+        self.hunting.is_hunting = False
         self.scavenging.is_scavenging = True
 
     def start_foraging(self):
+        '''Start foraging and stop other activities'''
         self.scavenging.is_scavenging = False
+        self.hunting.is_hunting = False
         self.foraging.is_foraging = True
 
     def start_hunting(self):
+        '''Start hunting and stop other activities'''
         self.scavenging.is_scavenging = False
         self.foraging.is_foraging = False
         self.hunting.is_hunting = True
 
     def stop_scavenging(self):
+        '''Stop scavenging activity'''
         self.scavenging.is_scavenging = False
 
     def stop_foraging(self):
+        '''Stop foraging activity'''
         self.foraging.is_foraging = False
 
     def stop_hunting(self):
+        '''Stop hunting activity'''
         self.hunting.is_hunting = False
 
     

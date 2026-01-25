@@ -71,6 +71,7 @@ class EngineeringMenu:
         screen.blit(hunting_text_surface, hunting_text_rect)
 
     def handle_engineering_scavenging_event(self, event):
+        '''Handle events for the engineering scavenging box'''
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  
             mouse_x, mouse_y = event.pos
             if self.engineering_scavenging_box.collidepoint(mouse_x, mouse_y):
@@ -79,6 +80,7 @@ class EngineeringMenu:
                 print(f"Scavenging start delay reduced to {self.scavenging_menu.scavenge_delay} ms")
 
     def handle_engineering_foraging_event(self, event):
+        '''Handle events for the engineering foraging box'''
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             mouse_x, mouse_y = event.pos
             if self.engineering_foraging_box.collidepoint(mouse_x, mouse_y):
@@ -87,6 +89,7 @@ class EngineeringMenu:
                 print(f"Foraging start delay reduced to {self.foraging_menu.forage_delay} ms")
 
     def handle_engineering_hunting_event(self, event):
+        '''Handle events for the engineering hunting box'''
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             mouse_x, mouse_y = event.pos
             if self.engineering_hunting_box.collidepoint(mouse_x, mouse_y):
