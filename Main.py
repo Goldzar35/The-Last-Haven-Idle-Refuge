@@ -61,17 +61,20 @@ for i, name in enumerate(button_names):
     btn = Button(0, y, sidebar_width, button_height, name, i) 
     sidebar_buttons.append(btn)
 
-# Instaniate Menus
+# Instantiate Menus
+default_menu = DefaultMenu(player, sidebar_width, window_width, window_height, game_state)
+inventory_menu = InventoryMenu(player, sidebar_width, window_width, window_height, game_state)
 scavenging_menu = ScavengingMenu(player, sidebar_width, window_width, window_height, game_state)
 foraging_menu = ForagingMenu(player, sidebar_width, window_width, window_height, game_state)
 hunting_menu = HuntingMenu(player, sidebar_width, window_width, window_height, game_state)
+shop_menu = ShopMenu(player, sidebar_width, window_width, window_height, game_state, scavenging_menu, foraging_menu, hunting_menu)
 engineering_menu = EngineeringMenu(game_state.player, sidebar_width, window_width, window_height, game_state, scavenging_menu, foraging_menu, hunting_menu)
 
 # Initialize Menus
 menus = {
-    0: DefaultMenu(game_state.player, sidebar_width, window_width, window_height),
-    1: InventoryMenu(game_state.player, sidebar_width, window_width, window_height),
-    2: ShopMenu(game_state.player, sidebar_width, window_width, window_height),
+    0: default_menu,
+    1: inventory_menu,
+    2: shop_menu,
     3: scavenging_menu,
     4: foraging_menu,
     5: hunting_menu,

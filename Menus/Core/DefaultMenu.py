@@ -1,7 +1,7 @@
 import pygame
 
 class DefaultMenu:
-    def __init__(self, player, sidebar_width, window_width, window_height):
+    def __init__(self, player, sidebar_width, window_width, window_height, game_state):
         '''Initialize anything specific to the Default Menu here'''
         self.player = player
         self.margin = 30
@@ -9,8 +9,8 @@ class DefaultMenu:
         self.window_width = window_width
         self.window_height = window_height
         available_width = self.window_width - self.sidebar_width
-
-        # Box dimensions
+        self.box_x = self.sidebar_width + self.margin
+        
         self.box_y = self.margin
         self.box_width = int(0.75 * available_width)
         self.box_x = self.sidebar_width + (available_width - self.box_width) // 2

@@ -3,11 +3,14 @@ import pygame
 from Entities.Player import * 
 
 class InventoryMenu:
-    def __init__(self, player, sidebar_width, window_width, window_height):
+    def __init__(self, player, sidebar_width, window_width, window_height, game_state):
         '''Initialize the Inventory Menu'''
         self.player = player
         self.sidebar_width = sidebar_width
         self.margin = 30
+        self.game_state = game_state
+        self.window_width = window_width
+        self.window_height = window_height
 
     def draw(self, screen):
         '''Draw the Inventory Menu elements on the screen'''
