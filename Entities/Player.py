@@ -1,9 +1,5 @@
 import pygame
 
-scavenge_tick = 0.5
-forage_tick = 0.5
-hunting_tick = 0.5
-
 class Player:
     def __init__(self):
         ''' Initialize player with default attributes '''
@@ -40,6 +36,11 @@ class Player:
             "Meat": 0
         }
         self.scavenging = False
+        self.foraging = False
+        self.hunting = False
+        self.scavenge_tick = 2.0
+        self.forage_tick = 2.0
+        self.hunting_tick = 2.0
 
     def add_inventory(self, items, quantity):
         ''' Add items to the player's inventory '''

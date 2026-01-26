@@ -24,7 +24,7 @@ pygame.init()
 player = Player()
 
 # Initialize GameState
-game_state = GameState()
+game_state = GameState(player)
 
 # Initial window size
 info = pygame.display.Info()
@@ -63,17 +63,16 @@ for i, name in enumerate(button_names):
 
 # Instantiate Menus
 default_menu = DefaultMenu(player, sidebar_width, window_width, window_height, game_state)
-inventory_menu = InventoryMenu(player, sidebar_width, window_width, window_height, game_state)
 scavenging_menu = ScavengingMenu(player, sidebar_width, window_width, window_height, game_state)
 foraging_menu = ForagingMenu(player, sidebar_width, window_width, window_height, game_state)
 hunting_menu = HuntingMenu(player, sidebar_width, window_width, window_height, game_state)
-shop_menu = ShopMenu(player, sidebar_width, window_width, window_height, game_state, scavenging_menu, foraging_menu, hunting_menu)
+shop_menu = ShopMenu(player, sidebar_width, window_width, window_height, game_state, player.scavenge_tick, player.forage_tick, player.hunting_tick)
 engineering_menu = EngineeringMenu(game_state.player, sidebar_width, window_width, window_height, game_state, scavenging_menu, foraging_menu, hunting_menu)
 
 # Initialize Menus
 menus = {
     0: default_menu,
-    1: inventory_menu,
+    1: InventoryMenu(game_state.player, sidebar_width, window_width, window_height, game_state),
     2: shop_menu,
     3: scavenging_menu,
     4: foraging_menu,
@@ -132,12 +131,12 @@ while running:
         if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_fortification_event"):
             menus[game_state.current_menu].handle_fortification_event(event)
 
-    # Update scavenging logic globally
+    # Update logic globally
     game_state.update_scavenging()
     game_state.update_foraging() 
     game_state.update_hunting()
 
-    # Update menu-specific logic (like scavenging delay)
+    # Update menu-specific logic
     if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "update"):
         menus[game_state.current_menu].update()
     

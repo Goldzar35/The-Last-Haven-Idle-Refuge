@@ -2,14 +2,15 @@ import pygame
 import random
 import time
 
-from Entities.Player import hunting_tick
+from Entities.Player import *
 
 class Hunting:
-    def __init__(self, player):
+    def __init__(self, player, hunting_tick):
         '''Initialize Hunting entity with player reference and hunting parameters'''
         self.player = player
         self.is_hunting = False
         self.hunting_time = 0
+        self.hunting_tick = hunting_tick
         self.items = {
             "Intact Infected Organ": 1,
             "Boar Tusk": 5,
@@ -31,7 +32,7 @@ class Hunting:
     def hunting(self):
         '''Perform hunting action'''
         current_time = time.time()
-        if self.is_hunting and current_time - self.hunting_time >= hunting_tick:
+        if self.is_hunting and current_time - self.hunting_time >= self.player.hunting_tick:
             self.hunting_time = current_time
             rand = random.uniform(1, 100)
             for item, chance in self.items.items():

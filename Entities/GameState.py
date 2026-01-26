@@ -7,13 +7,13 @@ from Entities.Player import Player
 from Entities.Fortification import Fortification
 
 class GameState:
-    def __init__(self):
+    def __init__(self, player):
         '''Initialize the game state with default values'''
-        self.player = Player()
+        self.player = player
         self.current_menu = 0
-        self.scavenging = Scavenging(self.player)
-        self.foraging = Foraging(self.player)
-        self.hunting = Hunting(self.player)
+        self.scavenging = Scavenging(self.player, self.player.scavenge_tick)
+        self.foraging = Foraging(self.player, self.player.forage_tick)
+        self.hunting = Hunting(self.player, self.player.hunting_tick)
         self.fortification = Fortification(self.player)
 
     def update_scavenging(self):

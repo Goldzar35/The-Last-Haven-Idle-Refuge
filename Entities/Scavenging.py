@@ -2,15 +2,16 @@ import pygame
 import random
 import time 
 
-from Entities.Player import scavenge_tick 
+from Entities.Player import * 
 
 
 class Scavenging:
-    def __init__(self, player):
+    def __init__(self, player, scavenge_tick):
         '''Initialize Scavenging entity with player reference and scavenging parameters'''
         self.player = player
         self.is_scavenging = False
         self.scavenge_time = 0
+        self.scavenge_tick = scavenge_tick
         self.items = {
             "Gasoline": 1,    
             "People": 5,         
@@ -22,7 +23,7 @@ class Scavenging:
             "Rope": 70,   
             "Fabric Scrap": 80,   
             "Cement": 90,     
-            "Wood Planks": 100      
+            "Wood Planks": 100
         }
     
     def toggle_scavenging(self):
@@ -33,7 +34,7 @@ class Scavenging:
     def scavenging(self):
         '''Perform scavenging action'''
         current_time = time.time()
-        if self.is_scavenging and current_time - self.scavenge_time >= scavenge_tick:
+        if self.is_scavenging and current_time - self.scavenge_time >= self.player.scavenge_tick:
             self.scavenge_time = current_time
             rand = random.uniform(1, 100) 
             for item, chance in self.items.items():

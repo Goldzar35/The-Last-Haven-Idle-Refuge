@@ -2,14 +2,15 @@ import pygame
 import random
 import time 
 
-from Entities.Player import forage_tick
+from Entities.Player import *
 
 class Foraging:
-    def __init__(self, player):
+    def __init__(self, player, forage_tick):
         '''Initialize Foraging entity with player reference and foraging parameters'''
         self.player = player
         self.is_foraging = False
         self.foraging_time = 0
+        self.forage_tick = forage_tick
         self.items = {
             "Mirabelle Fruit": 1,    
             "Magic Artifact": 5,         
@@ -32,7 +33,7 @@ class Foraging:
     def foraging(self):
         '''Perform foraging action'''
         current_time = time.time()
-        if self.is_foraging and current_time - self.foraging_time >= forage_tick:
+        if self.is_foraging and current_time - self.foraging_time >= self.player.forage_tick:
             self.foraging_time = current_time
             rand = random.uniform(1, 100) 
             for item, chance in self.items.items():
