@@ -22,11 +22,19 @@ class ScavengingMenu:
 
         self.scavenge_box = pygame.Rect(self.box_x, self.box_y, self.box_width, self.box_height)
 
+        self.scavenge_button_rect = pygame.Rect(self.box_x + 50, self.box_y + 50, 200, 50)
+        self.font = pygame.font.Font(None, 32)
+        self.scavenge_button_text = "Scavenge"
+
     def draw(self, screen):
         '''Draw the Scavenging Menu elements on the screen'''
         screen.fill((40, 40, 40))
-        pygame.draw.rect(screen, (100, 100, 100), self.scavenge_box)  
-        
+        pygame.draw.rect(screen, (100, 100, 100), self.scavenge_box)
+        pygame.draw.rect(screen, (100, 100, 100), self.scavenge_button_rect)
+        scavenge_button_text_surface = self.font.render(self.scavenge_button_text, True, (255, 255, 255))
+        scavenge_button_text_rect = scavenge_button_text_surface.get_rect(center=self.scavenge_button_rect.center)
+        screen.blit(scavenge_button_text_surface, scavenge_button_text_rect)
+
     def handle_scavenge_event(self, event,):
         '''Handle events for the scavenge_box to toggle scavenging'''
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  

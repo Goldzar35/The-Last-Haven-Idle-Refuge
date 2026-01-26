@@ -20,11 +20,19 @@ class HuntingMenu:
         self.box_height = int(0.4 * window_height)
 
         self.hunting_box = pygame.Rect(self.box_x, self.box_y, self.box_width, self.box_height)
+
+        self.hunting_button_rect = pygame.Rect(self.box_x + 50, self.box_y + 50, 200, 50)
+        self.font = pygame.font.Font(None, 32)
+        self.hunting_button_text = "Hunt"
     
     def draw(self, screen):
         '''Draw the Hunting Menu elements on the screen'''
         screen.fill((40, 40, 40))
         pygame.draw.rect(screen, (100, 100, 100), self.hunting_box)
+        pygame.draw.rect(screen, (100, 100, 100), self.hunting_button_rect)
+        hunt_button_text_surface = self.font.render(self.hunting_button_text, True, (255, 255, 255))
+        hunt_button_text_rect = hunt_button_text_surface.get_rect(center=self.hunting_button_rect.center)
+        screen.blit(hunt_button_text_surface, hunt_button_text_rect)
 
     def handle_hunting_event(self, event):
         '''Handle events for the hunting_box to toggle hunting'''
