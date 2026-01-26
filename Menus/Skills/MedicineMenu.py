@@ -11,7 +11,7 @@ class MedicineMenu:
 
     def draw(self, screen):
         '''Draw the Medicine Menu elements on the screen'''
-        screen.fill((110, 110, 110))
+        screen.fill((40, 40, 40))
         # Coming soon text
         font = pygame.font.Font(None, 200)
         text_surface = font.render("Coming Soon", True, (255, 255, 255))

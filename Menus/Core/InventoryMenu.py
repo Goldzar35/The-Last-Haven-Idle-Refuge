@@ -14,7 +14,7 @@ class InventoryMenu:
 
     def draw(self, screen):
         '''Draw the Inventory Menu elements on the screen'''
-        screen.fill((50, 50, 50)) 
+        screen.fill((40, 40, 40)) 
         font = pygame.font.Font(None, 25)
         y = self.margin
         x = self.sidebar_width + 20

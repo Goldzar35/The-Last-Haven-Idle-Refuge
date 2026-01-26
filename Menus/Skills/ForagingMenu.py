@@ -23,7 +23,7 @@ class ForagingMenu:
     
     def draw(self, screen):
         '''Draw the Foraging Menu elements on the screen'''
-        screen.fill((80, 80, 80))
+        screen.fill((40, 40, 40))
         pygame.draw.rect(screen, (100, 100, 100), self.foraging_box)
 
     def handle_foraging_event(self, event,):

@@ -103,6 +103,15 @@ while running:
         # For Default Menu
         if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_box_event"):
             menus[game_state.current_menu].handle_box_event(event)
+        # For Shop
+        if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_shop_button_1_event"):
+            menus[game_state.current_menu].handle_shop_button_1_event(event)
+        if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_shop_button_2_event"):
+            menus[game_state.current_menu].handle_shop_button_2_event(event)
+        if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_shop_button_3_event"):
+            menus[game_state.current_menu].handle_shop_button_3_event(event)
+        if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_shop_button_4_event"):
+            menus[game_state.current_menu].handle_shop_button_4_event(event)
         # For Scavenging
         if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_scavenge_event"):
             menus[game_state.current_menu].handle_scavenge_event(event)

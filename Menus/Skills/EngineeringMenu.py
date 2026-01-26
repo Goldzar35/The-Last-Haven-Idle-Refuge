@@ -53,7 +53,7 @@ class EngineeringMenu:
 
     def draw(self, screen):
         '''Draw the Engineering Menu elements on the screen'''
-        screen.fill((100, 100, 100)) 
+        screen.fill((40, 40, 40)) 
         pygame.draw.rect(screen, (120, 120, 120), self.engineering_scavenging_box)
         pygame.draw.rect(screen, (150, 150, 150), self.engineering_foraging_box)
         pygame.draw.rect(screen, (180, 180, 180), self.engineering_hunting_box)

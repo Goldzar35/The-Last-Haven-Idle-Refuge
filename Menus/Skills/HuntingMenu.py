@@ -23,7 +23,7 @@ class HuntingMenu:
     
     def draw(self, screen):
         '''Draw the Hunting Menu elements on the screen'''
-        screen.fill((90, 90, 90))
+        screen.fill((40, 40, 40))
         pygame.draw.rect(screen, (100, 100, 100), self.hunting_box)
 
     def handle_hunting_event(self, event):

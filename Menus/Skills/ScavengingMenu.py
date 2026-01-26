@@ -24,7 +24,7 @@ class ScavengingMenu:
 
     def draw(self, screen):
         '''Draw the Scavenging Menu elements on the screen'''
-        screen.fill((70, 70, 70))
+        screen.fill((40, 40, 40))
         pygame.draw.rect(screen, (100, 100, 100), self.scavenge_box)  
         
     def handle_scavenge_event(self, event,):
