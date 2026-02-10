@@ -26,7 +26,9 @@ class ShopMenu:
         # Button for shop button 1 text
         self.shop_button_1_rect = pygame.Rect(self.box_x_1 + 50, self.box_y_1 + 50, 200, 50)
         self.font = pygame.font.Font(None, 32)
-        self.shop_button_1_text = "Test1"
+        cost = self.scavenge_upgrade_cost()
+        scavenge_cost_str = ", ".join([f"{item}: {quantity}" for item, quantity in cost.items()])
+        self.shop_button_1_text = f"Scavenging Knowledge Cost: {scavenge_cost_str}"
 
         # Shop button 2 box dimensions
         self.box_x_2 = self.sidebar_width + self.margin + self.box_width_1 + self.margin
@@ -87,15 +89,33 @@ class ShopMenu:
         shop_button_4_text_rect = shop_button_4_text_surface.get_rect(center=self.shop_button_4.center)
         screen.blit(shop_button_4_text_surface, shop_button_4_text_rect)
 
+    def can_afford(self, scavenge_upgrade_cost):
+        '''Check if the player can afford the scavenging upgrade'''
+        for item, cost in scavenge_upgrade_cost.items():
+            if self.player.inventory.get(item, 0) < cost:
+                return False
+        return True
+
+    def scavenge_upgrade_cost(self):
+        '''Define the cost for scavenging upgrade'''
+        return {
+            "Wood Planks": 1 + (self.player.scavenge_upgrade_count * 1),
+        }
+
     def handle_shop_button_1_event(self, event):
         '''Handle events for shop_button_1 to perform an action, this button will reduce the scavenge tick speed'''
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             mouse_x, mouse_y = event.pos
             if self.shop_button_1.collidepoint(mouse_x, mouse_y):
-                if self.player.scavenge_tick > 0.1:
+                if self.player.scavenge_tick > 0.1 and self.can_afford(self.scavenge_upgrade_cost()):
+                    self.player.remove_inventory_bulk(self.scavenge_upgrade_cost())
+                    self.player.scavenge_upgrade_count += 1
                     self.player.scavenge_tick = max(0.1, round(self.player.scavenge_tick - 0.1, 2))
                     print("Shop Button 1 clicked!")
+                    print("Scavenge upgrades purchased:", self.player.scavenge_upgrade_count)
                     print("New scavenge tick:", self.player.scavenge_tick)
+                elif self.player.scavenge_tick > 0.1 and not self.can_afford(self.scavenge_upgrade_cost()):
+                    print("Cannot afford scavenging upgrade")
                 else:
                     print("Scavenge tick maxed")
 

@@ -21,7 +21,7 @@ class InventoryMenu:
         col_width = 300
         screen_height = screen.get_height()
         # Temp inventory display logic
-        for item, (item, quantity) in enumerate(self.player.inventory.items()):
+        for item, quantity in self.player.inventory.items():
             text = f"{item}: {quantity}"
             text_surf = font.render(text, True, (255, 255, 255))
             screen.blit(text_surf, (x, y))
@@ -37,4 +37,8 @@ class InventoryMenu:
 
     def remove_inventory(self, item, quantity):
         '''Remove items from the player's inventory'''
-        self.player.remove_from_inventory(item, quantity)
+        self.player.remove_inventory(item, quantity)
+
+    def remove_inventory_bulk(self, items_dict):
+        '''Remove multiple items from the player's inventory'''
+        self.player.remove_inventory_bulk(items_dict)

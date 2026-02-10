@@ -42,6 +42,10 @@ class Player:
         self.forage_tick = 2.0
         self.hunting_tick = 2.0
 
+        self.scavenge_upgrade_count = 0
+        self.forage_upgrade_count = 0
+        self.hunting_upgrade_count = 0
+
     def add_inventory(self, items, quantity):
         ''' Add items to the player's inventory '''
         if items in self.inventory:
@@ -55,6 +59,14 @@ class Player:
             self.inventory[item] -= quantity
         else:
             pass
+
+    def remove_inventory_bulk(self, items_dict):
+        ''' Remove multiple items from the player's inventory '''
+        for item, quantity in items_dict.items():
+            if item in self.inventory and self.inventory[item] >= quantity:
+                self.inventory[item] -= quantity
+            else:
+                pass
 
     def show_inventory(self):
         ''' Print the player's inventory to the console '''
