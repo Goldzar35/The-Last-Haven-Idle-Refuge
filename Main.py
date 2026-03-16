@@ -66,7 +66,7 @@ default_menu = DefaultMenu(player, sidebar_width, window_width, window_height, g
 scavenging_menu = ScavengingMenu(player, sidebar_width, window_width, window_height, game_state)
 foraging_menu = ForagingMenu(player, sidebar_width, window_width, window_height, game_state)
 hunting_menu = HuntingMenu(player, sidebar_width, window_width, window_height, game_state)
-shop_menu = ShopMenu(player, sidebar_width, window_width, window_height, game_state, player.scavenge_tick, player.forage_tick, player.hunting_tick)
+shop_menu = ShopMenu(player, sidebar_width, window_width, window_height, game_state)
 engineering_menu = EngineeringMenu(game_state.player, sidebar_width, window_width, window_height, game_state, scavenging_menu, foraging_menu, hunting_menu)
 
 # Initialize Menus

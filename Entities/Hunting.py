@@ -1,8 +1,8 @@
-import pygame
 import random
 import time
 
-from Entities.Player import *
+from Entities.Player import Player
+
 
 class Hunting:
     def __init__(self, player, hunting_tick):
@@ -19,10 +19,9 @@ class Hunting:
             "Zombie Flesh": 25,
             "Animal Fat": 40,
             "Hide": 60,
-            "Bones": 80,     
-            "Meat": 100   
+            "Bones": 80,
+            "Meat": 100,
         }
-    #
 
     def toggle_hunting(self):
         '''Toggle the hunting state'''

@@ -1,10 +1,9 @@
-import pygame
-
 from Entities.Scavenging import Scavenging
 from Entities.Foraging import Foraging
 from Entities.Hunting import Hunting
 from Entities.Player import Player
 from Entities.Fortification import Fortification
+
 
 class GameState:
     def __init__(self, player):
@@ -23,15 +22,14 @@ class GameState:
 
     def update_foraging(self):
         '''Update the foraging state if it's active'''
-        if hasattr(self, 'foraging') and self.foraging.is_foraging:
+        if self.foraging.is_foraging:
             self.foraging.foraging()
 
     def update_hunting(self):
         '''Update the hunting state if it's active'''
-        if hasattr(self, 'hunting') and self.hunting.is_hunting:
+        if self.hunting.is_hunting:
             self.hunting.hunting()
 
-    # Exclusive starters: starting one stops the other
     def start_scavenging(self):
         '''Start scavenging and stop other activities'''
         self.foraging.is_foraging = False
@@ -61,5 +59,3 @@ class GameState:
     def stop_hunting(self):
         '''Stop hunting activity'''
         self.hunting.is_hunting = False
-
-    

@@ -1,8 +1,8 @@
-import pygame
 import random
-import time 
+import time
 
-from Entities.Player import *
+from Entities.Player import Player
+
 
 class Foraging:
     def __init__(self, player, forage_tick):
@@ -12,18 +12,17 @@ class Foraging:
         self.foraging_time = 0
         self.forage_tick = forage_tick
         self.items = {
-            "Mirabelle Fruit": 1,    
-            "Magic Artifact": 5,         
-            "Medical Herbs": 15,         
-            "Honey Comb": 25,   
+            "Mirabelle Fruit": 1,
+            "Magic Artifact": 5,
+            "Medical Herbs": 15,
+            "Honey Comb": 25,
             "Fresh Water": 35,
-            "Berries": 45,         
-            "Seeds": 55,   
-            "Wild Vegetables": 65, 
-            "Fish": 80,     
-            "Dirty Water": 100   
+            "Berries": 45,
+            "Seeds": 55,
+            "Wild Vegetables": 65,
+            "Fish": 80,
+            "Dirty Water": 100,
         }
-    #
 
     def toggle_foraging(self):
         '''Toggle the foraging state'''
@@ -35,7 +34,7 @@ class Foraging:
         current_time = time.time()
         if self.is_foraging and current_time - self.foraging_time >= self.player.forage_tick:
             self.foraging_time = current_time
-            rand = random.uniform(1, 100) 
+            rand = random.uniform(1, 100)
             for item, chance in self.items.items():
                 if rand <= chance:
                     self.player.add_inventory(item, 1)

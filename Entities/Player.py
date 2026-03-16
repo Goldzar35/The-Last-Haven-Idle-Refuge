@@ -57,19 +57,14 @@ class Player:
         ''' Remove items from the player's inventory '''
         if item in self.inventory and self.inventory[item] >= quantity:
             self.inventory[item] -= quantity
-        else:
-            pass
 
     def remove_inventory_bulk(self, items_dict):
         ''' Remove multiple items from the player's inventory '''
         for item, quantity in items_dict.items():
             if item in self.inventory and self.inventory[item] >= quantity:
                 self.inventory[item] -= quantity
-            else:
-                pass
 
     def show_inventory(self):
         ''' Print the player's inventory to the console '''
-        print(self.inventory)
         for item, quantity in self.inventory.items():
             print(f"  {item}: {quantity}")

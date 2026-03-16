@@ -1,48 +1,56 @@
 # The Last Haven: Idle Refuge
-- Still need's a name
-- More heavy notes/learning material is put into a Notion dock with explanation's of how things work
 
-# Overview
-This is an idle game inspired by Melvor Idle, it is my first main project. Coded with python through Pygame. There are 3 active skills. Foraging, Hunting, and Scavenging which the player needs to actively sink their time into. They can only do one of these at a time. Then 6 passive skills. Cooking, Engineering, Legacy, Medicine, Fortification, Community. These are skills the player spends reasources in, waits an amount of time, and then get a reward out of.
+An idle/incremental game inspired by Melvor Idle. Built with Python and Pygame. First major project.
 
-# Features
--Menu Select
--Customizable Button's
--Temp Inventory
--Scavenging resource gathering
--Hunting reasource gathering
--Foraging reasource gathering
--Fortification background change
--Engineering to reduce starting time of scavenging, foraging, and hunting
+## Overview
 
-# Project Structure
-The Project is organized into these main folders
-    -Entities
-        Button
-        Foraging
-        Fortification
-        GameState
-        Hunting
-        Player
-        Scavenging
-    -Menus
-        -Core
-           DefaultMenu
-           InventoryMenu
-           ShopMenu 
-        -Skills
-            CommunityMenu
-            CookingMenu
-            EngineeringMenu
-            ForagingMenu
-            FortificationMenu
-            HuntingMenu
-            LegacyMenu
-            MedicineMenu
-            ScavengingMenu
-        -Services
-           Mutator
-           SaveFunction 
-    .gitnore
-    Main
-    README
+The player manages a survival camp in a post-apocalyptic world. There are 3 active skills — Scavenging, Foraging, and Hunting — which gather resources over time. Only one can run at a time. Passive skills like Engineering, Fortification, Cooking, Medicine, Community, and Legacy let the player spend resources to upgrade and improve the camp.
+
+## Features
+
+- Sidebar navigation with 12 menu pages
+- Scavenging, Foraging, and Hunting — active resource gathering with pending start delays
+- Shop — purchase tick speed upgrades for all 3 active skills (scaling costs)
+- Engineering — reduce start delays for all 3 active skills (scaling costs, visual MAXED state)
+- Fortification — visual base progression across 6 levels
+- Inventory — live display of all 30 resource types
+
+## Project Structure
+
+```
+Main.py
+Entities/
+    Button.py
+    Foraging.py
+    Fortification.py
+    GameState.py
+    Hunting.py
+    Player.py
+    Scavenging.py
+Menus/
+    Core/
+        DefaultMenu.py
+        InventoryMenu.py
+        ShopMenu.py
+    Skills/
+        CommunityMenu.py
+        CookingMenu.py
+        EngineeringMenu.py
+        ForagingMenu.py
+        FortificationMenu.py
+        HuntingMenu.py
+        LegacyMenu.py
+        MedicineMenu.py
+        ScavengingMenu.py
+Services/
+    Mutator.py
+    SaveFunction.py
+Assets/
+    Base_lvl_1.png … Base_lvl_6.png
+```
+
+## Coming Soon
+
+- Medicine, Cooking, Community, Legacy skill menus
+- Save / load system
+- Shop box 4

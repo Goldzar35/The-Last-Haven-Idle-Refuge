@@ -4,7 +4,7 @@
 Python idle/incremental game built with Pygame (inspired by Melvor Idle). First major project.
 - **Language**: Python 3.13
 - **Engine**: Pygame
-- **Current Version**: ~4.5
+- **Current Version**: ~4.6
 
 ## File Structure
 ```
@@ -12,7 +12,7 @@ Main.py                          # Entry point, game loop, sidebar nav, event ro
 Entities/
   Button.py                      # Generic UI button (x, y, w, h, text, action_id)
   GameState.py                   # Central state manager; enforces mutually exclusive skills
-  Player.py                      # Player data, inventory (33 item types), tick rates
+  Player.py                      # Player data, inventory (30 item types), tick rates, upgrade counts
   Scavenging.py                  # Active skill entity
   Foraging.py                    # Active skill entity
   Hunting.py                     # Active skill entity
@@ -21,12 +21,12 @@ Menus/
   Core/
     DefaultMenu.py               # Main landing page (clickable boxes)
     InventoryMenu.py             # Read-only inventory display
-    ShopMenu.py                  # Upgrade purchasing (4 upgrade boxes)
+    ShopMenu.py                  # Tick speed upgrades for all 3 active skills (4 boxes)
   Skills/
     ScavengingMenu.py            # Start/stop + pending state UI
     ForagingMenu.py              # Start/stop + pending state UI
     HuntingMenu.py               # Start/stop + pending state UI
-    EngineeringMenu.py           # Reduces start delays (3 subsystems)
+    EngineeringMenu.py           # Reduces start delays (3 subsystems, scaling costs)
     FortificationMenu.py         # Background progression UI
     MedicineMenu.py              # Placeholder (coming soon)
     CookingMenu.py               # Placeholder (coming soon)
@@ -54,7 +54,7 @@ All three follow identical structure:
 - Pending start state with delay (default 3000ms), tracked with `pygame.time.get_ticks()`
 - Probability-based loot tables (each item has a 1-100 chance value)
 - Start/stop controlled through `GameState` (starting one stops others)
-- Upgrade count tracked on `Player` (`scavenge_upgrade_count`, etc.)
+- Upgrade count tracked on `Player` (`scavenge_upgrade_count`, `forage_upgrade_count`, `hunting_upgrade_count`)
 
 ### Event Routing (Main.py)
 - Uses `hasattr(current_menu, 'handle_X_event')` to dispatch events
@@ -62,11 +62,17 @@ All three follow identical structure:
 - Menu-specific `update()` called each frame for pending state logic
 
 ### Shop/Upgrade Pattern
-- Affordability check before purchase
+- Affordability check before purchase using `can_afford(cost_dict)`
 - Deduct resources via `player.remove_inventory_bulk()`
-- Reduce tick rate / delay on `Player`
-- Minimum caps: tick 0.1s, delay 500ms
-- Scaling costs: `cost = base + (upgrade_count * scale_factor)` (only Scavenging fully implemented)
+- Reduce tick rate on `Player`; minimum cap 0.1s
+- Scaling costs: `cost = 1 + upgrade_count` (all three skills implemented)
+- Button text updates after each purchase to show new cost; shows MAXED when capped
+
+### Engineering Pattern
+- Reduces start delay per skill; minimum cap 500ms
+- Scaling costs derived from current delay: `cost = 1 + (3000 - delay) // 500`
+- Resources: Cement (Scavenging), Seeds (Foraging), Bones (Hunting)
+- Boxes dim visually and text changes to MAXED when fully upgraded
 
 ### Sidebar
 - 1600×900 window, 320px sidebar (20%), 1280px main area
@@ -80,17 +86,18 @@ All three follow identical structure:
 
 ## Known Bugs / Tech Debt
 - **Fortification bug**: `FortificationMenu` checks for `"Wood"` in inventory but the actual item is `"Wood Planks"`
-- **Scaling costs**: Only Scavenging upgrade has dynamic scaling — Foraging and Hunting upgrades lack scaling cost display/logic
-- **Fonts created per-menu**: Minor inefficiency; should ideally be shared
-- **ShopMenu boxes 3 & 4**: Hunting/future upgrades not fully implemented
+- **ShopMenu box 4**: Not yet implemented (placeholder "Coming Soon")
 
 ## Conventions
 - Class names: `[Feature]Menu` for menus, skill/entity names for Entities
 - Handler methods: `handle_[action]_event`
 - Box/rect vars: `[action]_box`
-- Docstrings on all classes
+- Button text helper methods prefixed with `_` (e.g. `_scavenge_button_text()`)
+- Fonts created once in `__init__`, never inside `draw()`
+- Specific imports only — no wildcard `import *`
+- Docstrings on all classes and methods
 - No save/load yet — game state resets on restart
 
 ## Development Status
-**Working**: Scavenging, Foraging, Hunting (active skills), Shop (scavenging upgrade), Engineering (delay upgrades), Fortification (visual), Inventory display
-**Placeholder**: Medicine, Cooking, Community, Legacy menus; save/load system
+**Working**: Scavenging, Foraging, Hunting (active skills), Shop (all 3 tick upgrades with scaling costs), Engineering (delay upgrades with scaling costs + visual MAXED state), Fortification (visual), Inventory display
+**Placeholder**: Medicine, Cooking, Community, Legacy menus; save/load system; Shop box 4
