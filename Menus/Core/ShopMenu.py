@@ -41,7 +41,9 @@ class ShopMenu:
         # Button for shop button 2 text
         self.shop_button_2_rect = pygame.Rect(self.box_x_2 + 50, self.box_y_2 + 50, 200, 50)
         self.font = pygame.font.Font(None, 32)
-        self.shop_button_2_text = "Test2"
+        forage_cost = self.forage_upgrade_cost()
+        forage_cost_str = ", ".join([f"{item}: {quantity}" for item, quantity in forage_cost.items()])
+        self.shop_button_2_text = f"Foraging Knowledge Cost: {forage_cost_str}"
 
         # Shop button 3 box dimensions
         self.box_x_3 = self.sidebar_width + self.margin
@@ -54,7 +56,9 @@ class ShopMenu:
         # Button for shop button 3 text
         self.shop_button_3_rect = pygame.Rect(self.box_x_3 + 50, self.box_y_3 + 50, 200, 50)
         self.font = pygame.font.Font(None, 32)
-        self.shop_button_3_text = "Test3"
+        hunting_cost = self.hunting_upgrade_cost()
+        hunting_cost_str = ", ".join([f"{item}: {quantity}" for item, quantity in hunting_cost.items()])
+        self.shop_button_3_text = f"Hunting Knowledge Cost: {hunting_cost_str}"
 
         # Shop button 4 box dimensions
         self.box_x_4 = self.sidebar_width + self.margin + self.box_width_3 + self.margin
@@ -67,7 +71,7 @@ class ShopMenu:
         # Button for shop button 4 text
         self.shop_button_4_rect = pygame.Rect(self.box_x_4 + 50, self.box_y_4 + 50, 200, 50)
         self.font = pygame.font.Font(None, 32)
-        self.shop_button_4_text = "Test4"
+        self.shop_button_4_text = "Coming Soon"
 
     def draw(self, screen):
         '''Draw the Shop Menu elements on the screen'''
@@ -102,6 +106,18 @@ class ShopMenu:
             "Wood Planks": 1 + (self.player.scavenge_upgrade_count * 1),
         }
 
+    def forage_upgrade_cost(self):
+        '''Define the cost for foraging upgrade'''
+        return {
+            "Berries": 1 + (self.player.forage_upgrade_count * 1),
+        }
+
+    def hunting_upgrade_cost(self):
+        '''Define the cost for hunting upgrade'''
+        return {
+            "Meat": 1 + (self.player.hunting_upgrade_count * 1),
+        }
+
     def handle_shop_button_1_event(self, event):
         '''Handle events for shop_button_1 to perform an action, this button will reduce the scavenge tick speed'''
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
@@ -111,6 +127,9 @@ class ShopMenu:
                     self.player.remove_inventory_bulk(self.scavenge_upgrade_cost())
                     self.player.scavenge_upgrade_count += 1
                     self.player.scavenge_tick = max(0.1, round(self.player.scavenge_tick - 0.1, 2))
+                    scavenge_cost = self.scavenge_upgrade_cost()
+                    scavenge_cost_str = ", ".join([f"{item}: {quantity}" for item, quantity in scavenge_cost.items()])
+                    self.shop_button_1_text = f"Scavenging Knowledge Cost: {scavenge_cost_str}"
                     print("Shop Button 1 clicked!")
                     print("Scavenge upgrades purchased:", self.player.scavenge_upgrade_count)
                     print("New scavenge tick:", self.player.scavenge_tick)
@@ -124,10 +143,18 @@ class ShopMenu:
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             mouse_x, mouse_y = event.pos
             if self.shop_button_2.collidepoint(mouse_x, mouse_y):
-                if self.player.forage_tick > 0.1:
+                if self.player.forage_tick > 0.1 and self.can_afford(self.forage_upgrade_cost()):
+                    self.player.remove_inventory_bulk(self.forage_upgrade_cost())
+                    self.player.forage_upgrade_count += 1
                     self.player.forage_tick = max(0.1, round(self.player.forage_tick - 0.1, 2))
+                    forage_cost = self.forage_upgrade_cost()
+                    forage_cost_str = ", ".join([f"{item}: {quantity}" for item, quantity in forage_cost.items()])
+                    self.shop_button_2_text = f"Foraging Knowledge Cost: {forage_cost_str}"
                     print("Shop Button 2 clicked!")
+                    print("Forage upgrades purchased:", self.player.forage_upgrade_count)
                     print("New forage tick:", self.player.forage_tick)
+                elif self.player.forage_tick > 0.1 and not self.can_afford(self.forage_upgrade_cost()):
+                    print("Cannot afford foraging upgrade")
                 else:
                     print("Forage tick maxed")
 
@@ -136,10 +163,18 @@ class ShopMenu:
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             mouse_x, mouse_y = event.pos
             if self.shop_button_3.collidepoint(mouse_x, mouse_y):
-                if self.player.hunting_tick > 0.1:
+                if self.player.hunting_tick > 0.1 and self.can_afford(self.hunting_upgrade_cost()):
+                    self.player.remove_inventory_bulk(self.hunting_upgrade_cost())
+                    self.player.hunting_upgrade_count += 1
                     self.player.hunting_tick = max(0.1, round(self.player.hunting_tick - 0.1, 2))
+                    hunting_cost = self.hunting_upgrade_cost()
+                    hunting_cost_str = ", ".join([f"{item}: {quantity}" for item, quantity in hunting_cost.items()])
+                    self.shop_button_3_text = f"Hunting Knowledge Cost: {hunting_cost_str}"
                     print("Shop Button 3 clicked!")
+                    print("Hunting upgrades purchased:", self.player.hunting_upgrade_count)
                     print("New hunting tick:", self.player.hunting_tick)
+                elif self.player.hunting_tick > 0.1 and not self.can_afford(self.hunting_upgrade_cost()):
+                    print("Cannot afford hunting upgrade")
                 else:
                     print("Hunting tick maxed")
 
