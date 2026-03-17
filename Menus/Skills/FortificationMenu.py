@@ -1,5 +1,7 @@
 import pygame
 
+from Utils import resource_path
+
 
 class FortificationMenu:
     def __init__(self, player, fortification, sidebar_width, window_width, window_height, game_state):
@@ -9,12 +11,12 @@ class FortificationMenu:
         self.margin = 30
         self.sidebar_width = sidebar_width
         self.backgrounds = [
-            pygame.image.load("Assets/Base_lvl_1.png").convert(),
-            pygame.image.load("Assets/Base_lvl_2.png").convert(),
-            pygame.image.load("Assets/Base_lvl_3.png").convert(),
-            pygame.image.load("Assets/Base_lvl_4.png").convert(),
-            pygame.image.load("Assets/Base_lvl_5.png").convert(),
-            pygame.image.load("Assets/Base_lvl_6.png").convert(),
+            pygame.image.load(resource_path("Assets/Base_lvl_1.png")).convert(),
+            pygame.image.load(resource_path("Assets/Base_lvl_2.png")).convert(),
+            pygame.image.load(resource_path("Assets/Base_lvl_3.png")).convert(),
+            pygame.image.load(resource_path("Assets/Base_lvl_4.png")).convert(),
+            pygame.image.load(resource_path("Assets/Base_lvl_5.png")).convert(),
+            pygame.image.load(resource_path("Assets/Base_lvl_6.png")).convert(),
         ]
         self.max_level = len(self.backgrounds) - 1
 
