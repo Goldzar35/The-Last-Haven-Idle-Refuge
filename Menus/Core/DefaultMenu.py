@@ -25,11 +25,14 @@ class DefaultMenu:
             pygame.Rect(self.box_x, self.box_y + self.box_height + 230, self.box_width, 50),
         ]
         self.boxes_active = False
+        self.font = pygame.font.Font(None, 48)
 
     def draw(self, screen):
         '''Draw the Default Menu elements on the screen'''
         screen.fill((40, 40, 40))
         pygame.draw.rect(screen, (80, 80, 80), self.idk_box)
+        text_surface = self.font.render("Coming Soon", True, (255, 255, 255))
+        screen.blit(text_surface, text_surface.get_rect(center=self.idk_box.center))
         if self.boxes_active:
             for box in self.additional_boxes:
                 pygame.draw.rect(screen, (150, 150, 150), box)
