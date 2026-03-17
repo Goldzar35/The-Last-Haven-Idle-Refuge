@@ -19,7 +19,7 @@ Entities/
   Fortification.py               # Base defense level tracker (6 levels, visual only)
 Menus/
   Core/
-    DefaultMenu.py               # Main landing page (clickable boxes)
+    DefaultMenu.py               # Main landing page (clickable box with "Coming Soon" label)
     InventoryMenu.py             # Read-only inventory display
     ShopMenu.py                  # Tick speed upgrades for all 3 active skills (4 boxes)
   Skills/
@@ -27,7 +27,7 @@ Menus/
     ForagingMenu.py              # Start/stop + pending state UI
     HuntingMenu.py               # Start/stop + pending state UI
     EngineeringMenu.py           # Reduces start delays (3 subsystems, scaling costs)
-    FortificationMenu.py         # Background progression UI
+    FortificationMenu.py         # Background progression UI (6 levels, scaling costs, MAXED state)
     MedicineMenu.py              # Placeholder (coming soon)
     CookingMenu.py               # Placeholder (coming soon)
     CommunityMenu.py             # Placeholder (coming soon)
@@ -85,7 +85,6 @@ All three follow identical structure:
 **Animal loot (Hunting)**: Intact Infected Organ, Boar Tusk, Blood Sample, Eggs, Zombie Flesh, Animal Fat, Hide, Bones, Meat
 
 ## Known Bugs / Tech Debt
-- **Fortification bug**: `FortificationMenu` checks for `"Wood"` in inventory but the actual item is `"Wood Planks"`
 - **ShopMenu box 4**: Not yet implemented (placeholder "Coming Soon")
 
 ## Conventions
@@ -99,5 +98,5 @@ All three follow identical structure:
 - No save/load yet — game state resets on restart
 
 ## Development Status
-**Working**: Scavenging, Foraging, Hunting (active skills), Shop (all 3 tick upgrades with scaling costs), Engineering (delay upgrades with scaling costs + visual MAXED state), Fortification (visual), Inventory display
+**Working**: Scavenging, Foraging, Hunting (active skills), Shop (all 3 tick upgrades with scaling costs), Engineering (delay upgrades with scaling costs + visual MAXED state), Fortification (6 levels, scaling costs, MAXED state), Inventory display, DefaultMenu ("Coming Soon" label)
 **Placeholder**: Medicine, Cooking, Community, Legacy menus; save/load system; Shop box 4

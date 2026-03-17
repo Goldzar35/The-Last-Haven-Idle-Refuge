@@ -12,7 +12,7 @@ The player manages a survival camp in a post-apocalyptic world. There are 3 acti
 - Scavenging, Foraging, and Hunting — active resource gathering with pending start delays
 - Shop — purchase tick speed upgrades for all 3 active skills (scaling costs)
 - Engineering — reduce start delays for all 3 active skills (scaling costs, visual MAXED state)
-- Fortification — visual base progression across 6 levels
+- Fortification — upgradeable base across 6 levels with scaling costs and MAXED state
 - Inventory — live display of all 30 resource types
 
 ## Project Structure
@@ -51,6 +51,7 @@ Assets/
 
 ## Coming Soon
 
+- Default menu content
 - Medicine, Cooking, Community, Legacy skill menus
 - Save / load system
 - Shop box 4
