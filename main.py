@@ -1,4 +1,5 @@
 import pygame
+import asyncio
 
 from Entities.Player import Player
 from Entities.Button import Button
@@ -40,7 +41,7 @@ sidebar_height = window_height
 button_count = 12
 button_height = int(0.1 * window_height)
 gap = int(0.01 * window_height)
-font = pygame.font.SysFont(None, 36)
+font = pygame.font.Font(None, 36)
 
 # Button names
 sidebar_buttons = []
@@ -86,74 +87,79 @@ menus = {
 }
 
 # Main game loop
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-        elif event.type == pygame.MOUSEWHEEL:
-            scroll_offset -= event.y * scroll_speed
-            scroll_offset = max(0, min(scroll_offset, max_scroll)) 
-        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1: 
-            mouse_x, mouse_y = event.pos
-            for btn in sidebar_buttons:
-                if btn.is_clicked((mouse_x, mouse_y)):
-                    game_state.current_menu = btn.action
-        # For Default Menu
-        if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_box_event"):
-            menus[game_state.current_menu].handle_box_event(event)
-        # For Shop
-        if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_shop_button_1_event"):
-            menus[game_state.current_menu].handle_shop_button_1_event(event)
-        if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_shop_button_2_event"):
-            menus[game_state.current_menu].handle_shop_button_2_event(event)
-        if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_shop_button_3_event"):
-            menus[game_state.current_menu].handle_shop_button_3_event(event)
-        if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_shop_button_4_event"):
-            menus[game_state.current_menu].handle_shop_button_4_event(event)
-        # For Scavenging
-        if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_scavenge_event"):
-            menus[game_state.current_menu].handle_scavenge_event(event)
-        # For Foraging
-        if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_foraging_event"):
-            menus[game_state.current_menu].handle_foraging_event(event)
-        # For Hunting
-        if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_hunting_event"):
-            menus[game_state.current_menu].handle_hunting_event(event)
-        # For Engineering
-        if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_engineering_scavenging_event"):
-            menus[game_state.current_menu].handle_engineering_scavenging_event(event)
-        if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_engineering_foraging_event"):
-            menus[game_state.current_menu].handle_engineering_foraging_event(event)
-        if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_engineering_hunting_event"):
-            menus[game_state.current_menu].handle_engineering_hunting_event(event)
-        # For Fortification
-        if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_fortification_event"):
-            menus[game_state.current_menu].handle_fortification_event(event)
+async def main():
+    global scroll_offset
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            elif event.type == pygame.MOUSEWHEEL:
+                scroll_offset -= event.y * scroll_speed
+                scroll_offset = max(0, min(scroll_offset, max_scroll))
+            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                mouse_x, mouse_y = event.pos
+                for btn in sidebar_buttons:
+                    if btn.is_clicked((mouse_x, mouse_y)):
+                        game_state.current_menu = btn.action
+            # For Default Menu
+            if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_box_event"):
+                menus[game_state.current_menu].handle_box_event(event)
+            # For Shop
+            if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_shop_button_1_event"):
+                menus[game_state.current_menu].handle_shop_button_1_event(event)
+            if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_shop_button_2_event"):
+                menus[game_state.current_menu].handle_shop_button_2_event(event)
+            if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_shop_button_3_event"):
+                menus[game_state.current_menu].handle_shop_button_3_event(event)
+            if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_shop_button_4_event"):
+                menus[game_state.current_menu].handle_shop_button_4_event(event)
+            # For Scavenging
+            if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_scavenge_event"):
+                menus[game_state.current_menu].handle_scavenge_event(event)
+            # For Foraging
+            if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_foraging_event"):
+                menus[game_state.current_menu].handle_foraging_event(event)
+            # For Hunting
+            if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_hunting_event"):
+                menus[game_state.current_menu].handle_hunting_event(event)
+            # For Engineering
+            if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_engineering_scavenging_event"):
+                menus[game_state.current_menu].handle_engineering_scavenging_event(event)
+            if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_engineering_foraging_event"):
+                menus[game_state.current_menu].handle_engineering_foraging_event(event)
+            if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_engineering_hunting_event"):
+                menus[game_state.current_menu].handle_engineering_hunting_event(event)
+            # For Fortification
+            if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "handle_fortification_event"):
+                menus[game_state.current_menu].handle_fortification_event(event)
 
-    # Update logic globally
-    game_state.update_scavenging()
-    game_state.update_foraging() 
-    game_state.update_hunting()
+        # Update logic globally
+        game_state.update_scavenging()
+        game_state.update_foraging()
+        game_state.update_hunting()
 
-    # Update menu-specific logic
-    if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "update"):
-        menus[game_state.current_menu].update()
-    
-    # Draw the current menu background
-    if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "draw"):
-        menus[game_state.current_menu].draw(screen)
+        # Update menu-specific logic
+        if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "update"):
+            menus[game_state.current_menu].update()
 
-    # Update buttons
-    for i, btn in enumerate(sidebar_buttons):
-        # Adjust button position for scrolling
-        btn.rect.y = gap + i * (button_height + gap) - scroll_offset
-        # Only draw buttons that are visible in the sidebar
-        if -button_height < btn.rect.y < sidebar_height:
-            btn.draw(screen, font)
+        # Draw the current menu background
+        if game_state.current_menu in menus and hasattr(menus[game_state.current_menu], "draw"):
+            menus[game_state.current_menu].draw(screen)
 
-    # Updates display
-    pygame.display.flip() 
+        # Update buttons
+        for i, btn in enumerate(sidebar_buttons):
+            # Adjust button position for scrolling
+            btn.rect.y = gap + i * (button_height + gap) - scroll_offset
+            # Only draw buttons that are visible in the sidebar
+            if -button_height < btn.rect.y < sidebar_height:
+                btn.draw(screen, font)
 
-pygame.quit()
+        # Updates display
+        pygame.display.flip()
+        await asyncio.sleep(0)
+
+    pygame.quit()
+
+asyncio.run(main())
 
